@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatar Problema</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Relatar Problema de Saneamento</h1>
+  <form id="form">
+    <input name="problema" placeholder="Problema" required>
+    <input name="localizacao" placeholder="Localização" required>
+    <input name="solucao" placeholder="Solução">
+    <input name="custo" type="number" placeholder="Custo">
+    <input name="retorno" type="number" placeholder="Retorno">
+    <input name="concorrente" placeholder="Concorrente">
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div id="lista"></div>
+
+  <script>
+    const form = document.getElementById('form');
+    const lista = document.getElementById('lista');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const dados = Object.fromEntries(new FormData(form));
+      const item = document.createElement('div');
+      item.innerHTML = `
+        <strong>${dados.problema}</strong> em ${dados.localizacao}<br>
+        Solução: ${dados.solucao}<br>
+        Custo: R$${dados.custo} | Retorno: R$${dados.retorno}<br>
+        Concorrente: ${dados.concorrente}
+        <hr>`;
+      lista.appendChild(item);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
